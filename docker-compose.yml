@@ -18,7 +18,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   mongo:
-    container_name: mongo
+    container_name: mongo2
     image: mongo:4.4
     restart: always
     environment:
