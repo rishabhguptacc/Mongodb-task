@@ -41,6 +41,12 @@ RUN a2enmod rewrite headers
 # 4. start with base php config, then add extensions
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# 5. install mongodb
+RUN apt-get update
+RUN apt-get install -y libcurl4-openssl-dev ssh nano pkg-config libssl-dev
+RUN pecl install mongodb xdebug && docker-php-ext-enable mongodb xdebug
+
 #upload
 RUN echo "file_uploads = On\n" \
          "memory_limit = 500M\n" \
