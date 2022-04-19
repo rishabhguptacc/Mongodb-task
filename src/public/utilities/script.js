@@ -3,8 +3,7 @@ $(document).ready(function(){
     var field = 1;
     var attribute = 1;
     var variant = 1;
-    var variation = 1;
-
+    var variationCounterArray = [];
 
     $('#showProducts').click(function(){
         // console.log('showProduct btn clicked');
@@ -54,42 +53,54 @@ $(document).ready(function(){
      */
 
     $("#addVariations").click(function() {
+
+        var attr = 1;
+        variationCounterArray.push(1);
+
+
         var html = '';
         html += '<div id="variant-'+variant+'" >';
-        html += '<div id="variations-'+variation+'">\
-                    <div class="row">\
-                        <div class="col">\
-                            <input type="text" class="form-control" placeholder="Attribute Name" aria-label="attributeName">\
-                        </div>\
-                        <div class="col">\
-                            <input type="text" class="form-control" placeholder="Attribute Value" aria-label="attributeValue">\
-                        </div>\
-                        <div class="col">\
-                        <input type="button" class="deleteButton form-control btn btn-danger" data-id="deleteAttribute-'+attribute+'" value="delete" aria-label="Value name">\
+        html += '<div id="attributes-'+variant+'" >\
+                    <div id="attribute-'+attr+'">\
+                        <div class="row" id="attribute-'+variant+'-'+variationCounterArray[variant-1]+'">\
+                            <div class="col">\
+                                <input type="text" class="form-control" placeholder="Attribute Name" aria-label="attributeName">\
+                            </div>\
+                            <div class="col">\
+                                <input type="text" class="form-control" placeholder="Attribute Value" aria-label="attributeValue">\
+                            </div>\
+                            <div class="col">\
+                            <input type="button" class="deleteAttributeButton form-control btn btn-danger" data-id="deleteAttribute-'+variant+'-'+variationCounterArray[variant-1]+'" value="delete" aria-label="Value name">\
+                            </div>\
                         </div>\
                     </div>\
-                </div><br>\
+                </div>\
+                    <br>\
                     <div class="row">\
                         <div class="col">\
                             <input type="text" class="form-control" placeholder="Price" aria-label="price">\
                         </div>\
                         <div class="col">\
-                            <input type="button" class="addAttribute form-control btn btn-success" data-id="addAttribute-'+attribute+'" value="Add Attributes" aria-label="addAttribute">\
+                            <input type="button" class="addAttribute form-control btn btn-success" data-id="addAttribute-'+variant+'-'+attr+'" value="Add Attributes" aria-label="addAttribute">\
                         </div>\
                         <div class="col">\
-                            <input type="button" class="deleteVariantButton form-control btn btn-danger" data-id="deleteVariant-'+variant+'" value="Delete Variant" aria-label="Delete variant">\
+                            <input type="button" class="deleteVariantButton form-control btn btn-danger" data-id="deleteVariant-'+variant+'-'+attr+'" value="Delete Variant" aria-label="Delete variant">\
                         </div>\
                     </div><br><br>\
                         ';
-
+/**
+ * line 80 : data-id="addAttribute-'+attribute+'"  REPLACE "attribute" with "variant" both are same thing...  
+ * and added "attr" 
+ * to make data-id="addAttribute-'+variant+'-'+attr+'"
+ */
 
         html += '</div>';
 
         $('#addedVariations').append(html);
 
-        attribute++;
+        // attribute++;
         variant++;
-        variation++;
+        
     });
 // ********************************** Dynamically adding the variations function ENDS ***************************************************
 
@@ -100,12 +111,9 @@ $(document).ready(function(){
      */
 
     $('#addedFields').on('click','.deleteButton', function(){
-        console.log('delete buttonclicked');
         var id = $(this).data('id');
-        // console.log(pid);
         var idNumber = id.split('-');
         var fieldId = '#field-'+idNumber[1];
-        // console.log(fieldId);
         $(fieldId).remove();
 
 
@@ -115,16 +123,16 @@ $(document).ready(function(){
 
 
     $('#addedVariations').on('click','.addAttribute', function(){
-        // console.log('addvaraition clkd');
 
         var id = $(this).data('id');
-        // console.log(id);
         var idNumber = id.split('-');
-        var attribute = idNumber[1];
+        var variant = idNumber[1];
 
+        variationCounterArray[variant-1]++;
+        
         var html = '';
         html += '\
-                    <div class="row">\
+                    <div class="row" id="attribute-'+variant+'-'+variationCounterArray[variant-1]+'">\
                         <div class="col">\
                             <input type="text" class="form-control" placeholder="Attribute Name" aria-label="attributeName">\
                         </div>\
@@ -132,7 +140,7 @@ $(document).ready(function(){
                             <input type="text" class="form-control" placeholder="Attribute Value" aria-label="attributeValue">\
                         </div>\
                         <div class="col">\
-                        <input type="button" class="deleteButton form-control btn btn-danger" data-id="deleteAttribute-'+attribute+'" value="delete" aria-label="deleteAttribute">\
+                        <input type="button" class="deleteAttributeButton form-control btn btn-danger" data-id="deleteAttribute-'+variant+'-'+variationCounterArray[variant-1]+'" value="delete" aria-label="deleteAttribute">\
                         </div>\
                     </div>\
         ';
@@ -144,11 +152,33 @@ $(document).ready(function(){
          * 
          * do the dynamics...
          */
-        var variationId = '#variations-1';
+        var attributesId = '#attributes-'+variant;
+        
 
-        $(variationId).append(html);
+        $(attributesId).append(html);
 
     });
+
+
+
+
+    // ********************************** Deleting Attribute function STARTS ***************************************************
+    /**
+     * This function deletes the particular attribute within a variation.
+     */
+
+     $('#addedVariations').on('click','.deleteAttributeButton', function(){
+        var id = $(this).data('id');
+        var idNumber = id.split('-');
+        var variant = idNumber[1];
+        var attribute = idNumber[2];
+        var fieldId = '#attribute-'+variant+'-'+attribute;
+
+        $(fieldId).remove();
+
+    });
+// ********************************** Deleting Attribute function ENDS ***************************************************
+
 
 
 // ********************************** Deleting Variant function STARTS ***************************************************
@@ -157,16 +187,11 @@ $(document).ready(function(){
      */
 
     $('#addedVariations').on('click','.deleteVariantButton', function(){
-        console.log('deleteVariantButton');
         var id = $(this).data('id');
-        // console.log(pid);
         var idNumber = id.split('-');
         var fieldId = '#variant-'+idNumber[1];
-        // console.log(fieldId);
         $(fieldId).remove();
 
-
-    
     });
 // ********************************** Deleting Variant function ENDS ***************************************************
 
