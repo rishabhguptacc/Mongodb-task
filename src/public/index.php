@@ -26,6 +26,7 @@ $config = new Config([]);
 // Define some absolute path constants to aid in locating resources
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
+define('BASE_URL', 'http://localhost:8080/');
 
 // Register an autoloader
 $loader = new Loader();
@@ -77,12 +78,23 @@ $container->set(
     }
 );
 
+// $container->set(
+//     'mongo',
+//     function () {
+//         $mongo = new MongoClient();
+
+//         return $mongo->selectDB('phalt');
+//     },
+//     true
+// );
+
 $container->set(
     'mongo',
     function () {
-        $mongo = new MongoClient();
+        $mongo = new \MongoDB\Client("mongodb://mongo", array("username"=>'root', "password"=>"password123"));
+        // mongo "mongodb+srv://sandbox.g819z.mongodb.net/myFirstDatabase" --username root
 
-        return $mongo->selectDB('phalt');
+        return $mongo->test->users;
     },
     true
 );
