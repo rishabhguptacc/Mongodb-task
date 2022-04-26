@@ -1,0 +1,113 @@
+<?php
+echo '<h1> Update Product </h1>';
+echo '<br>';
+
+echo $this->tag->linkTo(
+    [
+        'store/products',
+        'Products',
+        'class' => "btn btn-lg btn-success"
+    ]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    [
+        'store/addProduct',
+        'Add Product',
+        'class' => "btn btn-lg btn-success"
+    ]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    [
+        'store/orders',
+        'Orders',
+        'class' => "btn btn-lg btn-success"
+    ]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    [
+        'store/addOrder',
+        'Add Order',
+        'class' => "btn btn-lg btn-success"
+    ]
+);
+
+echo '<br>';
+echo '<br>';
+echo '<br>';
+
+// echo "<pre>";
+// // ********* code to check if Meta Fields exists **********
+if (null != $product['Meta Fields']) {
+    $numMeta = count($product['Meta Fields']);
+}
+
+echo '<br>';
+
+if (isset($product['Variations'][0])) {
+    $numVariation = count($product['Variations'][0]);
+}
+
+// // ********* code to check if Variations exists **********
+// print_r();
+// print_r($product);
+
+?>
+
+<form action="updatedProduct?id=<?= $product['_id'] ?>" method="post">
+    <label for="name">Name :
+        <input type="text" class="name" name="name" value="<?= $product['Name'] ?>">
+    </label><br>
+    <label for="category">Category name :
+        <input type="text" class="category" name="category" value="<?= $product['Category'] ?>">
+    </label><br>
+    <label for="price">Price :
+        <input type="text" class="price" name="price" value="<?= $product['Price'] ?>">
+    </label><br>
+    <label for="stock">Stock :
+        <input type="text" class="stock" name="stock" value="<?= $product['Stock'] ?>">
+    </label><br>
+
+    <div id="additionalField">
+        <input type="button" value="Additional Fields" id="addFieldsButton">
+
+        <div id="addedFields">
+            <br>
+            <?php
+            foreach ($product['Meta Fields'] as $k => $v) {
+            ?>
+                <label for="name">Name :
+                    <input type="text" class="name" name="name" value="<?= $product['Name'] ?>">
+                </label><br>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div id="additionalVariations">
+        <input type="button" value="Add Variations" id="addVariations">
+
+        <div id="addedVariations">
+            <br>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Product</button>
+</form>

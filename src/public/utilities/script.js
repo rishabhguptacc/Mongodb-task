@@ -19,16 +19,14 @@ $(document).ready(function(){
     $("#addFieldsButton").click(function() {
         
 
-        // $("#addAttributesButton").show();
-
         var html = '';
         html += '<div id="field-'+field+'" >';
         html += '<div class="row">\
                     <div class="col">\
-                        <input type="text" class="form-control" placeholder="Label" aria-label="Label name">\
+                        <input type="text" class="form-control" name="metaLabel[]" placeholder="Label" aria-label="Label name">\
                     </div>\
                     <div class="col">\
-                        <input type="text" class="form-control" placeholder="Value" aria-label="Value name">\
+                        <input type="text" class="form-control" name="metaValue[]" placeholder="Value" aria-label="Value name">\
                     </div>\
                     <div class="col">\
                         <input type="button" class="deleteButton form-control btn btn-danger" data-id="deleteField-'+field+'" value="delete" aria-label="Value name">\
@@ -64,10 +62,10 @@ $(document).ready(function(){
                     <div id="attribute-'+attr+'">\
                         <div class="row" id="attribute-'+variant+'-'+variationCounterArray[variant-1]+'">\
                             <div class="col">\
-                                <input type="text" class="form-control" placeholder="Attribute Name" aria-label="attributeName">\
+                                <input type="text" class="form-control" name="variationName['+variant+'][]" placeholder="Attribute Name" aria-label="attributeName">\
                             </div>\
                             <div class="col">\
-                                <input type="text" class="form-control" placeholder="Attribute Value" aria-label="attributeValue">\
+                                <input type="text" class="form-control" name="variationValue['+variant+'][]" placeholder="Attribute Value" aria-label="attributeValue">\
                             </div>\
                             <div class="col">\
                             <input type="button" class="deleteAttributeButton form-control btn btn-danger" data-id="deleteAttribute-'+variant+'-'+variationCounterArray[variant-1]+'" value="delete" aria-label="Value name">\
@@ -78,7 +76,7 @@ $(document).ready(function(){
                     <br>\
                     <div class="row">\
                         <div class="col">\
-                            <input type="text" class="form-control" placeholder="Price" aria-label="price">\
+                            <input type="text" class="form-control" name="variationPrice[]" placeholder="Price" aria-label="price">\
                         </div>\
                         <div class="col">\
                             <input type="button" class="addAttribute form-control btn btn-success" data-id="addAttribute-'+variant+'-'+attr+'" value="Add Attributes" aria-label="addAttribute">\
@@ -134,10 +132,10 @@ $(document).ready(function(){
         html += '\
                     <div class="row" id="attribute-'+variant+'-'+variationCounterArray[variant-1]+'">\
                         <div class="col">\
-                            <input type="text" class="form-control" placeholder="Attribute Name" aria-label="attributeName">\
+                            <input type="text" class="form-control" name="variationName['+variant+'][]" placeholder="Attribute Name" aria-label="attributeName">\
                         </div>\
                         <div class="col">\
-                            <input type="text" class="form-control" placeholder="Attribute Value" aria-label="attributeValue">\
+                            <input type="text" class="form-control" name="variationValue['+variant+'][]" placeholder="Attribute Value" aria-label="attributeValue">\
                         </div>\
                         <div class="col">\
                         <input type="button" class="deleteAttributeButton form-control btn btn-danger" data-id="deleteAttribute-'+variant+'-'+variationCounterArray[variant-1]+'" value="delete" aria-label="deleteAttribute">\

@@ -1,5 +1,51 @@
+<?php
 
-<form action="" method="post">
+
+echo '<br>';
+
+echo $this->tag->linkTo(
+    ['store/products',
+    'Products',
+    'class'=>"btn btn-lg btn-success"]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    ['store/addProduct',
+    'Add Product',
+    'class'=>"btn btn-lg btn-success"]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    ['store/orders',
+    'Orders',
+    'class'=>"btn btn-lg btn-success"]
+);
+
+echo '&nbsp;';
+
+echo '&nbsp;';
+
+echo $this->tag->linkTo(
+    ['store/addOrder',
+    'Add Order',
+    'class'=>"btn btn-lg btn-success"]
+);
+
+echo '<br>';
+echo '<br>';
+echo '<br>'; 
+?>
+
+
+<form action="addProduct" method="post">
     <label for="name">Name :
         <input type="text" class="name" name="name">
     </label><br>
@@ -14,7 +60,7 @@
     </label><br>
 
     <div id="additionalField">
-        <input type="button" value="Additional Fields" id="addFieldsButton" onclick="">
+        <input type="button" value="Additional Fields" id="addFieldsButton">
 
         <div id="addedFields">
             <br>
@@ -25,12 +71,12 @@
     <br><br>
 
     <div id="additionalVariations">
-        <input type="button" value="Add Variations" id="addVariations" onclick="">
-        <!-- <br><br>&nbsp;&nbsp;
-        <input type="button" value="Add Attributes" id="addAttributesButton" onclick=""> -->
+        <input type="button" value="Add Variations" id="addVariations">
 
         <div id="addedVariations">
             <br>
         </div>
     </div>
+
+    <button type="submit">Add Product</button>
 </form>

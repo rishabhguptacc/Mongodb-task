@@ -88,15 +88,24 @@ $container->set(
 //     true
 // );
 
+// $container->set(
+//     'mongo',
+//     function () {
+//         $mongo = new \MongoDB\Client("mongodb://mongo", array("username"=>'root', "password"=>"password123"));
+
+//         return $mongo->test->users;
+//     },
+//     true
+// );
+
+
+
 $container->set(
     'mongo',
     function () {
-        $mongo = new \MongoDB\Client("mongodb://mongo", array("username"=>'root', "password"=>"password123"));
-        // mongo "mongodb+srv://sandbox.g819z.mongodb.net/myFirstDatabase" --username root
-
-        return $mongo->test->users;
-    },
-    true
+        $mongo = new \MongoDB\Client('mongodb://mongo', array('username' => 'root', "password" => 'password123'));
+        return $mongo->istore;
+    }
 );
 
 // Getting a response instance
